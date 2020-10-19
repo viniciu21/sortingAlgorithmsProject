@@ -1,68 +1,58 @@
 #include "../sorting/sortingAlgorithm.hpp"
 
-void bubbleSort(std::vector<int> *lista)
+int bubbleSort(int lista[], int tam)
 {
 	int k = 1;
 	int aux = 0;
-	size_t tam = lista->size();
-	for (size_t i = 0; i < tam; i++)
+	for (int i = 0; i < tam; i++)
 	{
-		for (size_t j = k; j < tam; j++)
+		for (int j = k; j < tam; j++)
 		{
-			if (lista->at(i) > lista->at(j))
+			if (lista[i] > lista[j])
 			{
-				aux = lista->at(i);
-				// std::cout << " index"
-				// 					<< "(" << i << ") "
-				// 					<< "(" << j << ")"
-				// 					<< "\n";
-				lista->at(i) = lista->at(j);
-				lista->at(j) = aux;
-				// for (size_t l = 0; l < tam; l++)
-				// {
-				// 	std::cout << lista->at(l) << " ";
-				// }
-				// std::cout << "\n";
+				aux = lista[i];
+				lista[i] = lista[j];
+				lista[j] = aux;
 			}
 		}
 		k++;
 	}
+	return 1;
 }
 
-void quickSort(std::vector<int> *lista)
+void swap(int &a, int &b)
 {
-	int piv = (lista->size()) / 2;
-	int left = 0;
-	int right = (lista->size() - 1);
-	int aux = 0;
+	int t = a;
+	a = b;
+	b = t;
+}
 
-	std::cout << lista->at(piv) << "\n";
+int partition(int lista[], int low, int high)
+{
+	int pivot = lista[high]; // pivot
+	int i = (low - 1);			 // Index of smaller element
 
-	while (left <= right)
+	for (int j = low; j <= high - 1; j++)
 	{
-		while (lista->at(left) <= lista->at(piv))
+		// If current element is smaller than or
+		// equal to pivot
+		if (lista[j] <= pivot)
 		{
-			std::cout << "entrou aqui " << left << " "
-								<< "\n ";
-			left++;
-		};
-		while (lista->at(right) >= lista->at(piv))
-		{
-			right++;
+			i++; // increment index of smaller element
+			swap(lista[i], lista[j]);
 		}
+	}
+	swap(lista[i + 1], lista[high]);
+	return (i + 1);
+}
 
-		if (lista->at(left) > lista->at(right))
-		{
-			aux = lista->at(left);
-			lista->at(left) = lista->at(right);
-			lista->at(right) = aux;
-			left++;
-			right--;
-		};
-	}
-	for (size_t i = 0; i < (lista->size() - 1); i++)
+int quickSort(int lista[], int left, int right)
+{
+	if (left < right)
 	{
-		std::cout << lista->at(i) << " ";
+		int pi = partition(lista, left, right);
+		quickSort(lista, left, pi - 1);
+		quickSort(lista, pi + 1, right);
 	}
-	std::cout << "\n";
+	return 1;
 }

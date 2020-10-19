@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-void bubbleSort(std::vector<int> *lista);
-void quickSort(std::vector<int> *lista);
+int bubbleSort(int lista[], int tam);
+int quickSort(int lista[], int left, int right);
 
 #endif
