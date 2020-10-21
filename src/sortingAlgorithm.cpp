@@ -1,6 +1,6 @@
 #include "../sorting/sortingAlgorithm.hpp"
 
-int bubbleSort(int lista[], int tam)
+void bubbleSort(int lista[], int tam)
 {
 	int k = 1;
 	int aux = 0;
@@ -17,36 +17,33 @@ int bubbleSort(int lista[], int tam)
 		}
 		k++;
 	}
-	return 1;
 }
 
 void swap(int &a, int &b)
 {
-	int t = a;
+	int aux = a;
 	a = b;
-	b = t;
+	b = aux;
 }
 
-int partition(int lista[], int low, int high)
+int partition(int lista[], int left, int right)
 {
-	int pivot = lista[high]; // pivot
-	int i = (low - 1);			 // Index of smaller element
+	int pivot = lista[right];
+	int i = (left - 1);
 
-	for (int j = low; j <= high - 1; j++)
+	for (int j = left; j <= right - 1; j++)
 	{
-		// If current element is smaller than or
-		// equal to pivot
 		if (lista[j] <= pivot)
 		{
-			i++; // increment index of smaller element
+			i++;
 			swap(lista[i], lista[j]);
 		}
 	}
-	swap(lista[i + 1], lista[high]);
+	swap(lista[i + 1], lista[right]);
 	return (i + 1);
 }
 
-int quickSort(int lista[], int left, int right)
+void quickSort(int lista[], int left, int right)
 {
 	if (left < right)
 	{
@@ -54,5 +51,4 @@ int quickSort(int lista[], int left, int right)
 		quickSort(lista, left, pi - 1);
 		quickSort(lista, pi + 1, right);
 	}
-	return 1;
 }

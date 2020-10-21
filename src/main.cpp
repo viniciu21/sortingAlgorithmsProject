@@ -21,7 +21,7 @@ int main()
 
 	int quickValues[100], bubbleValues[100];
 
-	for (int i{50}; i < 100000; i += 50)
+	for (int i{50}; i < 10000; i += 50)
 	{
 		int listaBubble[i];
 		int listaQuick[i];
@@ -38,21 +38,21 @@ int main()
 
 			auto startChrono = chrono::steady_clock::now();
 
-			int result = bubbleSort(listaBubble, (sizeof(listaBubble) / sizeof(listaBubble[i])));
+			bubbleSort(listaBubble, (sizeof(listaBubble) / sizeof(listaBubble[i]) - 1));
 
 			auto endChrono = chrono::steady_clock::now();
 			auto timeDifference = endChrono - startChrono;
 
-			bubbleValues[k] = chrono::duration<long double, std::nano>(timeDifference).count();
+			bubbleValues[k] = chrono::duration<long double, std::milli>(timeDifference).count();
 
 			startChrono = chrono::steady_clock::now();
 
-			int result2 = quickSort(listaQuick, 0, (sizeof(listaQuick) / sizeof(listaQuick[0])));
+			quickSort(listaQuick, 0, (sizeof(listaQuick) / sizeof(listaQuick[0])));
 
 			endChrono = chrono::steady_clock::now();
 			timeDifference = endChrono - startChrono;
 
-			quickValues[k] = chrono::duration<long double, std::nano>(timeDifference).count();
+			quickValues[k] = chrono::duration<long double, std::milli>(timeDifference).count();
 		}
 		for (int z{0}; z < 100; z++)
 		{
